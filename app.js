@@ -66,14 +66,11 @@ If you’re sending a streaming response, such as with server - sent events, you
 */
 /*to keep client seesion alive*/
 updateSseClients('log');
-function logEvery50Seconds() {
-  setTimeout(() => {
-    updateSseClients("log");
-    logEvery50seconds();
-  }, 10000)
-}
+setInterval(() => {
+  updateSseClients('log');
+}, 10000)
 
-logEvery50Seconds();
+//logEvery50Seconds();
 
 app.get("/trie", function (req, res) {
   res.sendFile("./public/triehtml.html", { root: __dirname });
