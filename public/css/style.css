@@ -1,10 +1,51 @@
 @import url("https://fonts.googleapis.com/css?family=Open + Sans:800");
+@import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
 @keyframes dash1 {
   to {
     stroke-dashoffset: -1024;
   }
 }
 
+
+
+.beautiful {
+  color: white;
+  background-size: 0.2em 100%;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 1.1em ;
+  margin: 0;
+  letter-spacing: 23px;
+  text-shadow: 0px 0px 25px hotpink, 0px 0px 25px rgb(0, 0, 191),
+    0px 0px 25px rgb(0, 0, 191), 0px 0px 25px rgb(0, 0, 191);
+}
+
+#A, #TIFUL {
+  animation: blink 2s 2;
+  animation-delay: 1s;
+  
+}
+
+@keyframes blink {
+  from{text-shadow: 0px 0px 0px transparent; opacity: 0.3;}
+  25%{text-shadow: 0px 0px 0px transparent;opacity: 0.3;}
+  30%{text-shadow: 0px 0px 0px transparent;opacity: 0.3;}
+ 50%{text-shadow: 0px 0px 25px hotpink, 0px 0px 25px rgb(0, 0, 191),
+    0px 0px 25px rgb(0, 0, 191), 0px 0px 25px rgb(0, 0, 191);opacity: 0.7; }
+   75%{ text-shadow: 0px 0px 0px transparent;opacity: 0.3;}
+  to{ text-shadow: 0px 0px 0px transparent;opacity: 0.3;}
+}
+
+#BE, #U{
+  animation: flicker 1.7s 1;
+  animation-delay: 4s;
+}
+
+@keyframes flicker{
+  0%{text-shadow: 0px 0px 0px transparent;opacity: 0.3;}
+  50%{text-shadow: 0px 0px 0px transparent;opacity: 0.3;}
+  100%{text-shadow: 0px 0px 25px hotpink, 0px 0px 25px rgb(0, 0, 191),
+    0px 0px 25px rgb(0, 0, 191), 0px 0px 25px rgb(0, 0, 191);opacity: 1; }
+}
 
 .pulse-disk {
   fill: #ff3c64;

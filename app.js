@@ -13,7 +13,7 @@ var server = http.createServer(app);
 blockstore = {};
 sidechainstore = {};
 peerstore = {};
-block_count = 9;
+block_count = 0;
 sidechain_count = 0;
 peer_count = 0;
 
@@ -59,11 +59,9 @@ updateSseClients = function (message) {
   );
 };
 
-//channel for other site to send data to dashboard
-app.get("/channel", (req, res, next) => {
-  //  / const { id } = req.query;
-  //console.log(sidechainStore[id]);
-  updateSseClients("------------------------------------------");
+
+app.get("/trie", function (req, res) {
+  res.sendFile("./public/triehtml.html", { root: __dirname });
 });
 
 app.post("/dashboardblock", function (req, res, next) {

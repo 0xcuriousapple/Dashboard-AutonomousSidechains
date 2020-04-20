@@ -56,12 +56,12 @@ window.onload = function () {
     cir1.setAttribute("y", sidenewpos);
     cir1.setAttribute("dy", ".35em");
     cir1.setAttribute("fill", "white");
-    cir1.setAttribute("fill-opacity", ".50");
+    cir1.setAttribute("fill-opacity", ".70");
     sidechain_anchor.appendChild(cir1);
 
   }
 
-  peernewpos = 850;
+  peernewpos = 870;
   function peerUpdate(address) {
     var peer_anchor = this.document.getElementById("update_peerlist")
     peernewpos = peernewpos + 30;
@@ -72,7 +72,7 @@ window.onload = function () {
     cir1.setAttribute("y", peernewpos);
     cir1.setAttribute("dy", ".35em");
     cir1.setAttribute("fill", "white");
-    cir1.setAttribute("fill-opacity", ".50");
+    cir1.setAttribute("fill-opacity", ".70");
     peer_anchor.appendChild(cir1);
 
   }
