@@ -4,7 +4,8 @@
   "description": "Trying out the Express framework",
   "main": "express.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Lucas Jellema",
   "license": "ISC",
