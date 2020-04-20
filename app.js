@@ -65,7 +65,7 @@ Heroku supports HTTP 1.1 features such as long - polling and streaming responses
 If you’re sending a streaming response, such as with server - sent events, you’ll need to detect when the client has hung up, and make sure your app server closes the connection promptly.If the server keeps the connection open for 55 seconds without sending any data, you’ll see a request timeout.
 */
 /*to keep client seesion alive*/
-
+updateSseClients('log');
 function logEvery50Seconds() {
   setTimeout(() => {
     updateSseClients("log");
