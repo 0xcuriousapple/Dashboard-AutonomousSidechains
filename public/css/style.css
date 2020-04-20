@@ -5,6 +5,69 @@
   }
 }
 
+
+.pulse-disk {
+  fill: #ff3c64;
+}
+ .pulse-circle, .pulse-circle-2 {
+  stroke: #ff3c64;
+}
+.pulse-circle,
+.pulse-circle-2 {
+  transform-origin: center;
+  stroke-width: 2;
+  fill: none;
+  transform: translate3d(0, 0, 0);
+}
+.pulse-disk {
+  r: 6;
+}
+.pulse-circle {
+  r: 4;
+  animation: pulse 3s cubic-bezier(0.39, 0.54, 0.41, 1.5) infinite;
+}
+.pulse-circle-2 {
+  r: 16;
+  animation: pulse-2 3s cubic-bezier(0.39, 0.54, 0.41, 1.5) infinite;
+}
+@keyframes pulse {
+  0% {
+    r: 4;
+  }
+  50% {
+    r: 16;
+    opacity: 1;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    r: 16;
+  }
+}
+@keyframes pulse-2 {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  49.99% {
+    r: 16;
+    opacity: 0;
+  }
+  50% {
+    r: 4;
+    opacity: 1;
+  }
+  100% {
+    r: 16;
+    opacity: 1;
+  }
+}
+
+
 #update {
   background: #111;
   background-size: 0.2em 100%;

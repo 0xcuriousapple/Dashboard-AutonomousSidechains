@@ -68,15 +68,38 @@ app.get("/channel", (req, res, next) => {
 
 app.post("/dashboardblock", function (req, res, next) {
   blockstore[block_count] = req.body.block;
-  console.log(req.body.block);
   obj = {
-    update: "block",
-    id: block_count
+    type: "block",
+    id: block_count + 1
   }
-  updateSseClients(JSON.stringify(obj));
+  updateSseClients(obj);
   block_count = block_count + 1;
 });
 
+app.post("/dashboardsidechain", function (req, res, next) {
+  obj = {
+    type: "side",
+    name: req.body.obj.name,
+    address: req.body.obj.address,
+    id: req.body.obj.id,
+  }
+  updateSseClients(obj);
+});
+
+app.post("/dashboardpeer", function (req, res, next) {
+  obj = {
+    type: "peer",
+    address: req.body.obj.address,
+  }
+  updateSseClients(obj);
+});
+app.get("/block", (req, res, next) => {
+  const { id } = req.query;
+
+  const block = blockstore[id];
+
+  res.json({ block });
+});
 // GetDataFromOtherServer();
 
 // function GetDataFromOtherServer() {

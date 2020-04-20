@@ -37,38 +37,78 @@ window.onload = function () {
     block1t.innerHTML = block0t.innerHTML;
     block0t.innerHTML = `Block-${id}`;
 
-    block6r.href = block5t.href;
-    block5r.href = block4t.href;
-    block4r.href = block3t.href;
-    block3r.href = block2r.href;
-    block2r.href = block1r.href;
-    block1r.href = block0r.href;
-    block0r.href = `./block?id=${id}`;
+    block6r.href.baseVal = block5r.href.baseVal;
+    block5r.href.baseVal = block4r.href.baseVal;
+    block4r.href.baseVal = block3r.href.baseVal;
+    block3r.href.baseVal = block2r.href.baseVal;
+    block2r.href.baseVal = block1r.href.baseVal;
+    block1r.href.baseVal = block0r.href.baseVal;
+    block0r.href.baseVal = `./block?id=${id}`;
+  }
+  sidenewpos = 240;
+  function sidechainUpdate(name, address, id) {
+    var sidechain_anchor = this.document.getElementById("update_sidelist")
+    sidenewpos = sidenewpos + 30;
+    const cir1 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    var node = document.createTextNode(`${name} by ${address} local id :${id}`);
+    cir1.appendChild(node);
+    cir1.setAttribute("x", "0");
+    cir1.setAttribute("y", sidenewpos);
+    cir1.setAttribute("dy", ".35em");
+    cir1.setAttribute("fill", "white");
+    cir1.setAttribute("fill-opacity", ".50");
+    sidechain_anchor.appendChild(cir1);
+
+  }
+
+  peernewpos = 850;
+  function peerUpdate(address) {
+    var peer_anchor = this.document.getElementById("update_peerlist")
+    peernewpos = peernewpos + 30;
+    const cir1 = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    var node = document.createTextNode(`Address : ${address}`);
+    cir1.appendChild(node);
+    cir1.setAttribute("x", "1300");
+    cir1.setAttribute("y", peernewpos);
+    cir1.setAttribute("dy", ".35em");
+    cir1.setAttribute("fill", "white");
+    cir1.setAttribute("fill-opacity", ".50");
+    peer_anchor.appendChild(cir1);
+
   }
   var blocks = document.getElementById("redblocks");
-  var firstblock = document.getElementById("firstBlock");
   var lastblock = document.getElementById("blockdis");
-  var block0 = document.getElementById("block-0");
-  var block1 = document.getElementById("block-1");
-  var block2 = document.getElementById("block-2");
-
-  //lastblock.style.visibility = "hidden";
   playonce(lastblock);
   pause(blocks);
   playonce(blocks);
-  //block1.style.visibility = "visible";
-  //playonce(firstblock);
+
+  sidechainUpdate("Example : Flipkart", "localhost:/4000", "4");
+
 
   var source = new EventSource("../updates");
   source.onmessage = function (event) {
-    console.log(event.data);
-    obj = JSON.parse(event.data);
+    var obj = JSON.parse(event.data)
     console.log(obj);
-    playonce(blocks);
-    playonce(lastblock);
-    setTimeout(function () {
-      shift(parseInt(obj.id));
-    }, 1800);
-    // block2.style.visibility = "visible";
+    console.log(obj.type);
+    if (obj.type == "block") {
+      playonce(blocks);
+      playonce(lastblock);
+
+      setTimeout(function () {
+        shift(parseInt(obj.id));
+      }, 1800);
+    }
+    if (obj.type == "side") {
+
+      sidechainUpdate(obj.name, obj.address, obj.id);
+
+    }
+    if (obj.type == "peer") {
+
+      peerUpdate(obj.address);
+
+    }
+
   }; //onMessage
+
 };
