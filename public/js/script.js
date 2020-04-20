@@ -89,7 +89,7 @@ window.onload = function () {
   source.onmessage = function (event) {
     var obj = JSON.parse(event.data)
     console.log(obj);
-    console.log(obj.type);
+
     if (obj.type == "block") {
       playonce(blocks);
       playonce(lastblock);

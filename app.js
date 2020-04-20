@@ -59,6 +59,20 @@ updateSseClients = function (message) {
   );
 };
 
+/*
+Long - polling and streaming responses
+Heroku supports HTTP 1.1 features such as long - polling and streaming responses.An application has an initial 30 second window to respond with a single byte back to the client.However, each byte transmitted thereafter(either received from the client or sent by your application) resets a rolling 55 second window.If no data is sent during the 55 second window, the connection will be terminated.
+If you’re sending a streaming response, such as with server - sent events, you’ll need to detect when the client has hung up, and make sure your app server closes the connection promptly.If the server keeps the connection open for 55 seconds without sending any data, you’ll see a request timeout.
+*/
+/*to keep client seesion alive*/
+
+function logEvery50Seconds() {
+  setTimeout(() => {
+    updateSseClients("log");
+  }, 50000)
+}
+
+logEvery50Seconds();
 
 app.get("/trie", function (req, res) {
   res.sendFile("./public/triehtml.html", { root: __dirname });
