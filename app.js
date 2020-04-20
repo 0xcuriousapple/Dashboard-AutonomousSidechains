@@ -8,30 +8,50 @@ var APP_VERSION = "0.8";
 var PORT = process.env.PORT || 3000;
 var app = express();
 var server = http.createServer(app);
-var io = require('socket.io')(server);
+var io = require("socket.io")(server);
 
 blockstore = {};
 sidechainstore = {};
 peerstore = {};
-block_count = 0;
+block_count = -1;
 sidechain_count = 0;
 peer_count = 0;
 
 server.listen(PORT, function () {
   console.log(
     "Server running, version " +
-    APP_VERSION +
-    ", Express is listening... at " +
-    PORT +
-    " for requests"
+      APP_VERSION +
+      ", Express is listening... at " +
+      PORT +
+      " for requests"
   );
 });
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(express.static(__dirname + "/public"));
 
-io.on('connection', (socket) => {
-  console.log('a user connected-----------------------');
+io.on("connection", (socket) => {
+  console.log("a user connected-----------------------");
+  tempblockstore = {};
+  for (i = 0; i <= block_count && i < 7; i++) {
+    tempblockstore[i] = block_count - i;
+  }
+
+  tempsidestore = {};
+  for (i = 0; i < sidechain_count && i < 8; i++) {
+    tempsidestore[i] = sidechainstore[sidechain_count - i - 1];
+  }
+
+  temppeerstore = {};
+  for (i = 0; i < peer_count && i < 5; i++) {
+    temppeerstore[i] = peerstore[peer_count - i - 1];
+  }
+  obj = {
+    block: tempblockstore,
+    side: tempsidestore,
+    peer: temppeerstore,
+  };
+  socket.emit("init", obj);
 });
 
 app.get("/trie", function (req, res) {
@@ -39,12 +59,12 @@ app.get("/trie", function (req, res) {
 });
 
 app.post("/dashboardblock", function (req, res, next) {
-  blockstore[block_count] = req.body.block;
+  blockstore[block_count + 1] = req.body.block;
   obj = {
     type: "block",
-    id: block_count + 1
-  }
-  io.emit('chat message', obj);
+    id: block_count + 1,
+  };
+  io.emit("chat message", obj);
   block_count = block_count + 1;
   res.end();
 });
@@ -55,22 +75,25 @@ app.post("/dashboardsidechain", function (req, res, next) {
     name: req.body.obj.name,
     address: req.body.obj.address,
     id: req.body.obj.id,
-  }
-  io.emit('chat message', obj);
+  };
+  sidechainstore[sidechain_count] = obj;
+  sidechain_count = sidechain_count + 1;
+  io.emit("chat message", obj);
   res.end();
 });
 
 app.post("/dashboardpeer", function (req, res, next) {
   console.log(req.body.obj);
   obj = {
-
     type: "peer",
     address: req.body.obj.address,
-  }
-
-  io.emit('chat message', obj);
+  };
+  peerstore[peer_count] = obj.address;
+  peer_count = peer_count + 1;
+  io.emit("chat message", obj);
   res.end();
 });
+
 app.get("/block", (req, res, next) => {
   const { id } = req.query;
 
@@ -79,16 +102,14 @@ app.get("/block", (req, res, next) => {
   res.json({ block });
 });
 
+app.get("/allsidechains", (req, res, next) => {
+  res.json({ sidechainstore });
+});
 
-/*
-Long - polling and streaming responses
-Heroku supports HTTP 1.1 features such as long - polling and streaming responses.An application has an initial 30 second window to respond with a single byte back to the client.However, each byte transmitted thereafter(either received from the client or sent by your application) resets a rolling 55 second window.If no data is sent during the 55 second window, the connection will be terminated.
-If you’re sending a streaming response, such as with server - sent events, you’ll need to detect when the client has hung up, and make sure your app server closes the connection promptly.If the server keeps the connection open for 55 seconds without sending any data, you’ll see a request timeout.
-*/
-/*to keep client seesion alive*/
-// updateSseClients('log');
-// setInterval(() => {
-//   updateSseClients('log');
-// }, 10000)
+app.get("/allpeers", (req, res, next) => {
+  res.json({ peerstore });
+});
 
-//logEvery50Seconds();
+app.get("/blockchain", (req, res, next) => {
+  res.json({ blockstore });
+});
