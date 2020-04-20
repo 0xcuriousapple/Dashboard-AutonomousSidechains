@@ -1,19 +1,20 @@
 {
-  "name": "part3",
+  "name": "dashboard",
   "version": "1.0.0",
-  "description": "Trying out the Express framework",
+  "description": "realtime dashboard for blockchain",
   "main": "express.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "author": "Lucas Jellema",
+  "author": "thehead",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "prompt": "^1.0.0",
     "request": "^2.88.2",
-    "serve-static": "^1.10.2"
+    "serve-static": "^1.10.2",
+    "socket.io": "^2.3.0"
   }
 }

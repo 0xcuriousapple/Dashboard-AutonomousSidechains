@@ -36,40 +36,16 @@ var request = require("request");
 // );
 
 
-// let { obj } = {
-//   obj: {
-//     name: "Amazon",
-//     address: "Amazon",
-//     id: "Amazon",
-//   },
-// };
-
-// request.post(
-//   "http://localhost:1234/dashboardsidechain",
-//   {
-//     json: {
-//       obj,
-//     },
-//   },
-//   (error, res, body) => {
-//     if (error) {
-//       console.error(error);
-//       return;
-//     }
-//     console.log(`statusCode: ${res.statusCode}`);
-//     console.log(body);
-//   }
-// );
-
 let { obj } = {
   obj: {
-    address: "0x945f1679564C2f1d499e7796264bA3E4a8ce9109",
+    name: "Amazon",
+    address: "Amazon",
+    id: "Amazon",
   },
 };
-console.log("sad");
 
 request.post(
-  "https://bkdashboard.herokuapp.com/dashboardpeer",
+  "http://localhost:3000/dashboardsidechain",
   {
     json: {
       obj,
@@ -84,3 +60,29 @@ request.post(
     console.log(body);
   }
 );
+
+// let { obj } = {
+//   obj: {
+//     address: "0x945f1679564C2f1d499e7796264bA3E4a8ce9109",
+//   },
+// };
+
+
+// request.post(
+//   "http://localhost:3000/dashboardpeer",
+//   {
+//     json: {
+//       obj,
+//     },
+//   },
+//   (error, res, body) => {
+//     if (error) {
+//       console.error(error);
+//       return;
+//     }
+//     console.log(`statusCode: ${res.statusCode}`);
+//     console.log(body);
+//     res.end();
+//   }
+
+// );

@@ -1,4 +1,6 @@
 window.onload = function () {
+  var socket = io();
+
   function playonce(element) {
     element.style.animationPlayState = "running";
     element.style.webkitAnimationPlayState = "running";
@@ -85,9 +87,34 @@ window.onload = function () {
   sidechainUpdate("Example : Flipkart", "localhost:/4000", "4");
 
 
-  var source = new EventSource("../updates");
-  source.onmessage = function (event) {
-    var obj = JSON.parse(event.data)
+  // var source = new EventSource("../updates");
+  // source.onmessage = function (event) {
+  //   var obj = JSON.parse(event.data)
+  //   console.log(obj);
+
+  //   if (obj.type == "block") {
+  //     playonce(blocks);
+  //     playonce(lastblock);
+
+  //     setTimeout(function () {
+  //       shift(parseInt(obj.id));
+  //     }, 1800);
+  //   }
+  //   if (obj.type == "side") {
+
+  //     sidechainUpdate(obj.name, obj.address, obj.id);
+
+  //   }
+  //   if (obj.type == "peer") {
+
+  //     peerUpdate(obj.address);
+
+  //   }
+
+  // }; //onMessage
+
+  socket.on('chat message', function (msg) {
+    var obj = msg;
     console.log(obj);
 
     if (obj.type == "block") {
@@ -108,7 +135,10 @@ window.onload = function () {
       peerUpdate(obj.address);
 
     }
+  });
 
-  }; //onMessage
+
+
+
 
 };
