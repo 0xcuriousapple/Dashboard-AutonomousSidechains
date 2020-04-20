@@ -69,7 +69,7 @@ updateSseClients('log');
 function logEvery50Seconds() {
   setTimeout(() => {
     updateSseClients("log");
-    logEvery50econds();
+    logEvery50seconds();
   }, 10000)
 }
 
