@@ -119,8 +119,9 @@ window.onload = function () {
 
     if (obj.type == "block") {
       playonce(blocks);
-      playonce(lastblock);
-
+      setTimeout(function () {
+        playonce(lastblock);
+      }, 1800);
       setTimeout(function () {
         shift(parseInt(obj.id));
       }, 1800);

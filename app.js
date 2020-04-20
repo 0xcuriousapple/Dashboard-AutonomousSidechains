@@ -57,6 +57,7 @@ app.post("/dashboardsidechain", function (req, res, next) {
     id: req.body.obj.id,
   }
   io.emit('chat message', obj);
+  res.end();
 });
 
 app.post("/dashboardpeer", function (req, res, next) {
@@ -68,8 +69,7 @@ app.post("/dashboardpeer", function (req, res, next) {
   }
 
   io.emit('chat message', obj);
-
-
+  res.end();
 });
 app.get("/block", (req, res, next) => {
   const { id } = req.query;
