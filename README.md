@@ -1,9 +1,9 @@
 # Dashboard
 
-This is the real time Animated dashboard developed for - [AutonomousSidechains](https://github.com/abhishekvispute/AutonomousSidechains)
-It is hosted on heroku : - [Dashboard](https://bkdashboard.herokuapp.com/)
+This is the real time animated dashboard developed for [AutonomousSidechains](https://github.com/abhishekvispute/AutonomousSidechains).
+It is hosted on heroku [Dashboard](https://bkdashboard.herokuapp.com/)
 
-![Image description](https://drive.google.com/file/d/1HbMYoide0q8EbmYizw2I1LYGsDQyDcBQ/view?usp=sharing)
+![Image description](https://drive.google.com/file/d/1HbMYoide0q8EbmYizw2I1LYGsDQyDcBQ/view)
 ## How to run
 
 Install the required libraries:
