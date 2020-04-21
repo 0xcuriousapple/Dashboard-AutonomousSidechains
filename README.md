@@ -1,7 +1,8 @@
 # Dashboard
 
 This is the real time animated dashboard developed for [AutonomousSidechains](https://github.com/abhishekvispute/AutonomousSidechains).
-It is hosted on heroku [Dashboard](https://bkdashboard.herokuapp.com/)
+
+## It is hosted on heroku [Dashboard](https://bkdashboard.herokuapp.com/)
 
 ![Image description](https://github.com/abhishekvispute/Dashboard/blob/master/screenshot.png)
 ## How to run
